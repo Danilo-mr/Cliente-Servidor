@@ -1,3 +1,5 @@
+package servidor;
+
 import java.net.*;
 import java.io.*;
 
@@ -21,16 +23,19 @@ public class Servidor {
             out = new DataOutputStream(socket.getOutputStream());
 
             String line = "";
-
-            while(!line.equals("Encerrar")) {
+            Corretor corretor = new Corretor();
+            while(true) {
                 try {
                     line = in.readUTF();
+                    if(line.equals("Encerrar"))
+                        break;
+                    corretor.corrigir(line);
                     System.out.println(line);
                 } catch(IOException i) {
                     System.out.println(i);
                 }
             }
-            out.writeUTF("Receba essa mensagem cliente!");
+            out.writeUTF(corretor.getResultadoEstudante());
             System.out.println("Closing connection");
             socket.close();
             in.close();
