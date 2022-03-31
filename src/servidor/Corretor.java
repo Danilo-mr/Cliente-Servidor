@@ -1,5 +1,5 @@
 package servidor;
-//1
+//12aaaa
 public class Corretor {
     private int acertos;
     private int erros;
